@@ -4,43 +4,58 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 120 100% 50%;
+    --background: 210 60% 96%;
+    --foreground: 240 40% 25%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 120 100% 50%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 40% 25%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 120 100% 50%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 40% 25%;
 
-    --primary: 120 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 240 60% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 120 100% 50%;
+    --secondary: 300 40% 88%;
+    --secondary-foreground: 240 40% 25%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 120 30% 50%;
+    --muted: 210 40% 92%;
+    --muted-foreground: 240 20% 55%;
 
-    --accent: 120 100% 50%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 330 60% 80%;
+    --accent-foreground: 240 40% 25%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 4%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 120 100% 25%;
-    --input: 0 0% 10%;
-    --ring: 120 100% 50%;
+    --border: 240 30% 75%;
+    --input: 210 40% 92%;
+    --ring: 240 60% 55%;
 
     --radius: 0rem;
 
-    --pixel-green: #00ff41;
-    --pixel-green-dim: #00cc33;
-    --pixel-green-dark: #004d14;
-    --pixel-bg: #0a0a0a;
-    --pixel-bg-card: #0d0f0d;
-    --pixel-border: #00ff41;
-    --pixel-border-dim: #004d14;
+    /* Pixel pastel palette */
+    --pixel-blue: #5b8dee;
+    --pixel-blue-dark: #2e5fd4;
+    --pixel-blue-light: #c8dcff;
+    --pixel-pink: #f0a0c0;
+    --pixel-pink-dark: #d0609a;
+    --pixel-pink-light: #fce4f0;
+    --pixel-purple: #b07dea;
+    --pixel-purple-dark: #7a3db8;
+    --pixel-purple-light: #ead4ff;
+    --pixel-yellow: #ffe066;
+    --pixel-yellow-dark: #c8a000;
+    --pixel-mint: #7de8c0;
+
+    --pixel-bg: #ddeeff;
+    --pixel-bg-card: #ffffff;
+    --pixel-bg-section: #eaf3ff;
+    --pixel-text: #2a3a7a;
+    --pixel-text-dim: #6070aa;
+    --pixel-border: #5b8dee;
+    --pixel-border-dim: #aac4f0;
+    --pixel-shadow: #a0b8e8;
   }
 }
 
@@ -54,7 +69,7 @@
 
   body {
     background-color: var(--pixel-bg);
-    color: var(--pixel-green);
+    color: var(--pixel-text);
     font-family: "Share Tech Mono", monospace;
     font-size: 14px;
     line-height: 1.6;
@@ -62,7 +77,7 @@
     position: relative;
   }
 
-  /* CRT scanlines overlay */
+  /* Subtle scanlines on light bg */
   body::before {
     content: "";
     position: fixed;
@@ -73,84 +88,16 @@
     background: repeating-linear-gradient(
       0deg,
       transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.15) 2px,
-      rgba(0, 0, 0, 0.15) 4px
+      transparent 3px,
+      rgba(91, 141, 238, 0.04) 3px,
+      rgba(91, 141, 238, 0.04) 4px
     );
     pointer-events: none;
     z-index: 9998;
   }
-
-  /* CRT vignette */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-      ellipse at center,
-      transparent 60%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
-    pointer-events: none;
-    z-index: 9997;
-  }
 }
 
-/* Pixel noise background */
-@keyframes noise {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  10% {
-    transform: translate(-2px, -2px);
-  }
-  20% {
-    transform: translate(2px, 2px);
-  }
-  30% {
-    transform: translate(-1px, 2px);
-  }
-  40% {
-    transform: translate(1px, -1px);
-  }
-  50% {
-    transform: translate(-2px, 1px);
-  }
-  60% {
-    transform: translate(2px, -2px);
-  }
-  70% {
-    transform: translate(-1px, -1px);
-  }
-  80% {
-    transform: translate(1px, 2px);
-  }
-  90% {
-    transform: translate(-2px, 2px);
-  }
-}
-
-@keyframes flicker {
-  0%,
-  96%,
-  100% {
-    opacity: 1;
-  }
-  97% {
-    opacity: 0.92;
-  }
-  98% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 0.96;
-  }
-}
-
+/* Animations */
 @keyframes blink {
   0%,
   49% {
@@ -159,15 +106,6 @@
   50%,
   100% {
     opacity: 0;
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
   }
 }
 
@@ -188,42 +126,42 @@
   }
 }
 
-@keyframes pixel-glow {
+@keyframes pixel-glow-blue {
   0%,
   100% {
     text-shadow:
-      0 0 4px var(--pixel-green),
-      0 0 8px var(--pixel-green);
+      2px 2px 0 var(--pixel-shadow),
+      0 0 8px rgba(91, 141, 238, 0.4);
   }
   50% {
     text-shadow:
-      0 0 8px var(--pixel-green),
-      0 0 16px var(--pixel-green),
-      0 0 24px var(--pixel-green);
+      2px 2px 0 var(--pixel-shadow),
+      0 0 16px rgba(91, 141, 238, 0.7),
+      0 0 24px rgba(176, 125, 234, 0.4);
   }
 }
 
-@keyframes progress-fill {
-  from {
-    width: 0%;
-  }
-  to {
-    width: var(--target-width);
-  }
-}
-
-@keyframes cursor-blink {
+@keyframes float {
   0%,
-  49% {
-    border-right-color: var(--pixel-green);
-  }
-  50%,
   100% {
-    border-right-color: transparent;
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
   }
 }
 
-/* Pixel font utility */
+@keyframes pixel-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Fonts */
 .font-pixel {
   font-family: "Press Start 2P", monospace;
 }
@@ -232,65 +170,60 @@
   font-family: "Share Tech Mono", monospace;
 }
 
-/* Pixel border (1px hard edges) */
+/* Cards */
+.pixel-card {
+  background: var(--pixel-bg-card);
+  border: 3px solid var(--pixel-blue);
+  box-shadow: 5px 5px 0 var(--pixel-shadow);
+  position: relative;
+}
+
+.pixel-card-pink {
+  background: var(--pixel-bg-card);
+  border: 3px solid var(--pixel-pink-dark);
+  box-shadow: 5px 5px 0 var(--pixel-pink);
+  position: relative;
+}
+
+.pixel-card-purple {
+  background: var(--pixel-bg-card);
+  border: 3px solid var(--pixel-purple-dark);
+  box-shadow: 5px 5px 0 var(--pixel-purple-light);
+  position: relative;
+}
+
+/* Borders */
 .pixel-border {
-  border: 2px solid var(--pixel-green);
-  box-shadow:
-    0 0 6px var(--pixel-green),
-    inset 0 0 6px rgba(0, 255, 65, 0.05);
+  border: 3px solid var(--pixel-blue);
+  box-shadow: 4px 4px 0 var(--pixel-shadow);
 }
 
 .pixel-border-dim {
   border: 2px solid var(--pixel-border-dim);
 }
 
-.pixel-border-top {
-  border-top: 2px solid var(--pixel-green);
-}
-
-/* Pixel card */
-.pixel-card {
-  background: var(--pixel-bg-card);
-  border: 2px solid var(--pixel-green);
-  box-shadow:
-    4px 4px 0 var(--pixel-green-dark),
-    0 0 8px rgba(0, 255, 65, 0.1);
-  position: relative;
-}
-
-.pixel-card::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 4px;
-  right: 4px;
-  height: 1px;
-  background: var(--pixel-green);
-  opacity: 0.5;
-}
-
-/* Pixel button */
+/* Button — blue outline */
 .pixel-btn {
   font-family: "Press Start 2P", monospace;
   font-size: 10px;
-  background: transparent;
-  border: 2px solid var(--pixel-green);
-  color: var(--pixel-green);
-  padding: 8px 16px;
+  background: var(--pixel-blue);
+  border: 3px solid var(--pixel-blue-dark);
+  color: #ffffff;
+  padding: 10px 18px;
   cursor: pointer;
   position: relative;
-  box-shadow: 3px 3px 0 var(--pixel-green-dark);
+  box-shadow: 4px 4px 0 var(--pixel-blue-dark);
   text-transform: uppercase;
   transition: none;
   display: inline-block;
   text-decoration: none;
+  letter-spacing: 0.05em;
 }
 
 .pixel-btn:hover {
-  background: var(--pixel-green);
-  color: var(--pixel-bg);
-  box-shadow: none;
-  transform: translate(3px, 3px);
+  background: var(--pixel-blue-dark);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--pixel-blue-dark);
 }
 
 .pixel-btn:active {
@@ -298,83 +231,114 @@
   box-shadow: none;
 }
 
-/* Pixel checkbox */
+/* Button pink */
+.pixel-btn-pink {
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  background: var(--pixel-pink);
+  border: 3px solid var(--pixel-pink-dark);
+  color: #ffffff;
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--pixel-pink-dark);
+  text-transform: uppercase;
+  transition: none;
+  display: inline-block;
+  letter-spacing: 0.05em;
+}
+
+.pixel-btn-pink:hover {
+  background: var(--pixel-pink-dark);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--pixel-pink-dark);
+}
+
+/* Outline button */
+.pixel-btn-outline {
+  font-family: "Press Start 2P", monospace;
+  font-size: 10px;
+  background: transparent;
+  border: 3px solid var(--pixel-blue);
+  color: var(--pixel-blue);
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--pixel-border-dim);
+  text-transform: uppercase;
+  transition: none;
+  display: inline-block;
+}
+
+.pixel-btn-outline:hover {
+  background: var(--pixel-blue);
+  color: #fff;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--pixel-border-dim);
+}
+
+/* Checkbox */
 .pixel-checkbox {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--pixel-green);
-  background: transparent;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--pixel-blue);
+  background: var(--pixel-blue-light);
   flex-shrink: 0;
   position: relative;
 }
 
 .pixel-checkbox.checked {
-  background: var(--pixel-green);
+  background: var(--pixel-blue);
 }
 
 .pixel-checkbox.checked::after {
   content: "X";
   position: absolute;
-  top: -2px;
+  top: -3px;
   left: 1px;
   font-family: "Press Start 2P", monospace;
   font-size: 10px;
-  color: var(--pixel-bg);
+  color: #fff;
   line-height: 1;
 }
 
-/* Pixel progress bar */
+/* Progress bar */
 .pixel-progress-outer {
-  border: 2px solid var(--pixel-green);
-  height: 20px;
-  background: var(--pixel-bg);
+  border: 3px solid var(--pixel-blue);
+  height: 22px;
+  background: var(--pixel-blue-light);
   position: relative;
   overflow: hidden;
 }
 
 .pixel-progress-inner {
   height: 100%;
-  background: var(--pixel-green);
-  transition: width 1s steps(20);
-}
-
-.pixel-progress-inner::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: #fff;
-  opacity: 0.6;
+  background: linear-gradient(
+    90deg,
+    var(--pixel-blue) 0%,
+    var(--pixel-purple) 100%
+  );
+  transition: width 0.5s steps(15);
 }
 
 /* Glow text */
 .pixel-glow {
-  animation: pixel-glow 2s ease-in-out infinite;
+  animation: pixel-glow-blue 2.5s ease-in-out infinite;
 }
 
-/* Flicker effect */
-.pixel-flicker {
-  animation: flicker 8s infinite;
-}
-
-/* Blinking cursor */
+/* Cursor blink */
 .pixel-cursor::after {
   content: "_";
   animation: blink 1s step-end infinite;
-  color: var(--pixel-green);
+  color: var(--pixel-blue);
 }
 
-/* Dashed divider — pixel style */
+/* Dividers */
 .pixel-divider {
   border: none;
-  border-top: 2px dashed var(--pixel-border-dim);
-  margin: 24px 0;
+  border-top: 3px dashed var(--pixel-border-dim);
+  margin: 20px 0;
 }
 
-/* Stepped divider */
 .pixel-divider-stepped {
   height: 8px;
   background: repeating-linear-gradient(
@@ -386,24 +350,92 @@
   );
 }
 
-/* Nav active */
-.nav-active {
-  color: var(--pixel-bg);
-  background: var(--pixel-green);
-  padding: 4px 8px;
+/* Pink stepped divider */
+.pixel-divider-pink {
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pixel-pink) 0px,
+    var(--pixel-pink) 8px,
+    transparent 8px,
+    transparent 16px
+  );
 }
 
-/* Glitch on hover */
+/* Nav active */
+.nav-active {
+  background: var(--pixel-blue) !important;
+  color: #ffffff !important;
+  border-color: var(--pixel-blue-dark) !important;
+}
+
+/* Glitch hover */
 .pixel-glitch:hover {
   animation: glitch 0.3s steps(1) forwards;
 }
 
-/* Tag / stat box */
+/* Stat box */
 .pixel-stat {
-  border: 2px solid var(--pixel-green);
+  border: 3px solid var(--pixel-blue);
   padding: 12px 16px;
-  background: rgba(0, 255, 65, 0.04);
-  box-shadow: 3px 3px 0 var(--pixel-green-dark);
+  background: var(--pixel-blue-light);
+  box-shadow: 3px 3px 0 var(--pixel-shadow);
+}
+
+.pixel-stat-pink {
+  border: 3px solid var(--pixel-pink-dark);
+  padding: 12px 16px;
+  background: var(--pixel-pink-light);
+  box-shadow: 3px 3px 0 var(--pixel-pink);
+}
+
+/* Grid background */
+.pixel-grid-bg {
+  background-color: var(--pixel-bg);
+  background-image:
+    linear-gradient(rgba(91, 141, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 141, 238, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Tag pill */
+.pixel-tag {
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  border: 2px solid var(--pixel-blue);
+  padding: 4px 8px;
+  background: var(--pixel-blue-light);
+  color: var(--pixel-blue-dark);
+  display: inline-block;
+}
+
+.pixel-tag-pink {
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  border: 2px solid var(--pixel-pink-dark);
+  padding: 4px 8px;
+  background: var(--pixel-pink-light);
+  color: var(--pixel-pink-dark);
+  display: inline-block;
+}
+
+.pixel-tag-purple {
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  border: 2px solid var(--pixel-purple-dark);
+  padding: 4px 8px;
+  background: var(--pixel-purple-light);
+  color: var(--pixel-purple-dark);
+  display: inline-block;
+}
+
+/* Float animation for decorative elements */
+.pixel-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pixel-float-slow {
+  animation: float 5s ease-in-out infinite;
 }
 
 /* Scrollbar */
@@ -412,36 +444,19 @@
 }
 ::-webkit-scrollbar-track {
   background: var(--pixel-bg);
-  border-left: 1px solid var(--pixel-border-dim);
+  border-left: 2px solid var(--pixel-border-dim);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--pixel-green-dim);
+  background: var(--pixel-blue);
 }
 
-/* Grid pixel bg */
-.pixel-grid-bg {
-  background-color: var(--pixel-bg);
-  background-image:
-    linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* Section bg variants */
+.pixel-section-blue {
+  background: var(--pixel-bg-section);
 }
-
-/* Corner decorations for cards */
-.pixel-corner::before,
-.pixel-corner::after {
-  content: "+";
-  position: absolute;
-  font-family: "Share Tech Mono", monospace;
-  font-size: 12px;
-  color: var(--pixel-green);
-  opacity: 0.7;
+.pixel-section-pink {
+  background: #fce4f0;
 }
-.pixel-corner::before {
-  top: 2px;
-  left: 6px;
-}
-.pixel-corner::after {
-  bottom: 2px;
-  right: 6px;
+.pixel-section-purple {
+  background: #ead4ff;
 }
